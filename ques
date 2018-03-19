@@ -1,0 +1,71 @@
+Scenario:
+Create an ASP. Net MVC Web application for the hospital management system
+
+
+Table 1– tblDepartment<Employeeid>
+Insert data into this table
+Department_Id Department_Name
+1 ENT
+2 Cardiology
+3 Neurology
+
+
+Table 2– tblPatient<Employeeid>
+PatientID should be auto generated and showed in the
+popup with proper message.
+Name It should be a text box(Required)
+Age It should be a text box with number
+format(Required)
+Contact number It should accept 10 digit mobile
+number(Required)
+Address It should be a text box with multiple
+lines(Required)
+
+
+Table 3– tblBookAppointment<Employeeid>
+AppointmentId should be auto generated and showed in the
+popup with proper message.
+PatientID It should be text box which accept only the
+registered patients(Required)
+Department It should be a drop down , needs to bind it from
+department table.(Required)
+DoctorName Text box,Required
+PreferredDate It should be a calendar(Required)
+Time_Slot It should be a drop down with two options
+9:00am-1:00pm
+2:00pm-5:00pm
+(Required)
+status It should be booked by default(No need to include
+this field in User interface)
+
+
+CRUD Operation 1:
+Create a web page for login with the following credentials :
+UserName: Admin
+Password: Admin
+
+
+CRUD Operation 2:
+Create a web page for register a patient with the following fields
+Name, Age, Contact number and Address
+Add a register button for adding patient details into database. On click of register button, need to
+show proper success or failure message to the user. The success message should include the PatientID.
+Use proper controls and implement all necessary validations
+
+
+CRUD Operation 3:
+Create a web page for booking appointment for a patient with the following fields
+PatientID, Department, DoctorName, PreferredDate, Time_Slot
+Add a BookAppointment button for adding booking details into database. On click of
+BookAppointment button, need to show proper success or failure message to the user. The success
+message should include the AppointmentId.
+Use proper controls and implement all necessary validations
+
+
+CRUD Operation 4:
+Create a web page for view all appointment details.
+Need to populate all the appointments in a web grid or table. Add a link called 'Cancel Appointment'
+in the last column for canceling the selected appointment. When the user clicks on cancel
+appointment link ,need to update the status of appointment to cancelled.
+Implement search by Department functionality also.
+Use Entity frame work and Handle all run time exceptions.
