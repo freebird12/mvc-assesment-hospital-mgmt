@@ -1,0 +1,93 @@
+use db01tms155_1718
+create table department_1349730
+(depid int identity(101,1) primary key,
+ dep_name varchar(20))
+
+ insert into department_1349730
+ values('ENT')
+
+ insert into department_1349730
+ values('Cardiology')
+
+ insert into department_1349730
+ values('Neurology')
+
+ select *
+ from department_1349730
+
+ create table patient_1349730
+ ( pid int identity(1001,1) primary key,
+   name varchar(20) not null,
+   age int not null,
+   contact bigint not null,
+   p_add varchar(30)not null
+)
+
+
+create table appointment_1349730
+(aid int identity(1,1) primary key,
+ pid int foreign key references patient_1349730(pid),
+ dep varchar(20) ,
+ doc_name varchar(20),
+  adate date,
+  atime varchar(20),
+  astatus varchar(20) default 'Booked')
+
+
+  create procedure add_patient
+  (@Name varchar(20) , @Age int , @Contact bigint, @Address varchar(30),@pid int out)
+  as 
+  begin
+  insert into patient_1349730
+  values(@Name, @Age, @Contact, @Address)
+  set @pid=@@identity
+  end
+
+
+  select *
+  from patient_1349730
+
+  select *
+  from appointment_1349730
+
+
+  alter procedure add_booking
+  (@PatientID int,
+   @Department varchar(20), 
+   @DoctorName varchar(20), 
+   @PreferredDate date,
+   @Time_Slot varchar(20),
+   @bid int out)
+   as
+   begin
+   insert into appointment_1349730(pid,dep,doc_name,adate,atime)
+   values(@PatientID ,@Department, @DoctorName, @PreferredDate, @Time_Slot)
+   set @bid=@@IDENTITY
+   end
+  
+
+  alter procedure view_booking
+   as
+   begin
+   select appointment_1349730.pid ,patient_1349730.name,aid,dep,doc_name,adate,atime,astatus
+   from appointment_1349730 inner join 
+   patient_1349730
+   on appointment_1349730.pid=patient_1349730.pid
+   end
+
+   create procedure all_booking
+   as
+   begin
+   select*
+   from appointment_1349730
+   end
+
+   create procedure del_booking
+   @cid int
+   as
+   begin
+   delete from appointment_1349730
+   where aid=@cid;
+   update appointment_1349730
+   set astatus='Cancelled'
+   end
