@@ -1,0 +1,60 @@
+@model mvc_sol.Models.appointment_1349730
+@{
+    ViewBag.Title = "booking";
+}
+
+<h2>booking</h2>
+
+
+@using (Html.BeginForm())
+{
+    <table>
+
+        <tr>
+            <td> @Html.Label("Patient Id")</td>
+            <td>  @Html.TextBoxFor(h => h.pid) </td>
+            <td>  @Html.ValidationMessageFor(h => h.pid)</td>
+        </tr>
+
+        <tr>
+            <td>@Html.Label("Department Name")</td>
+            <td>@Html.DropDownListFor(h=>h.dep, new List<SelectListItem>
+                {
+                new SelectListItem{ Text="ENT", Value = "ENT" },  
+                new SelectListItem{ Text="Cardiology", Value = "Cardiology" },
+                new SelectListItem{ Text="Neurology", Value = "Neurology" },
+                })
+                </td>
+            <td>@Html.ValidationMessageFor(h => h.dep)</td>
+                </tr>
+        <tr>
+
+            <td> @Html.Label("Doctor Name ")</td>
+            <td> @Html.TextBoxFor(h => h.doc_name)"</td>
+            <td>@Html.ValidationMessageFor(h => h.doc_name)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Preffered Date")</td>
+            <td>@Html.TextBoxFor(h => h.adate,new { @class = "date picker", @type = "date" })</td>
+            <td>@Html.ValidationMessageFor(h => h.adate)</td>
+        </tr>
+        <tr>
+            <td>@Html.Label("Time slot") </td>
+            <td>@Html.DropDownListFor(h => h.atime, new List<SelectListItem>
+                {
+                new SelectListItem{ Text="9:00am-1:00pm", Value = "9:00am-1:00pm" },
+                new SelectListItem{ Text="2:00pm-5:00pm", Value = "2:00pm-5:00pm" },
+                })</td>
+            <td>@Html.ValidationMessageFor(h => h.atime)</td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Book Appointment" /></td>
+        </tr>
+
+    </table>
+
+
+
+}
