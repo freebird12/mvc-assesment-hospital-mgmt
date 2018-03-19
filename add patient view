@@ -1,0 +1,44 @@
+@model mvc_sol.Models.patient_1349730
+@{
+    ViewBag.Title = "New Patient";
+}
+
+<h2>add</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+
+        <tr>
+            <td> @Html.Label("Patient Name")</td>
+            <td>  @Html.TextBoxFor(h => h.name) </td>
+            <td>  @Html.ValidationMessageFor(h => h.name)</td>
+</tr>
+
+        <tr>
+           
+            <td> @Html.Label("Age")</td>
+            <td> @Html.TextBoxFor(h => h.age)"</td>
+             <td>@Html.ValidationMessageFor(h => h.age)</td>
+</tr>
+        <tr>
+           <td>@Html.Label("Contact number")</td> 
+           <td>@Html.TextBoxFor(h => h.contact)</td>
+           <td>@Html.ValidationMessageFor(h => h.contact)</td> 
+        </tr>
+        <tr>
+            <td>@Html.Label("Home address") </td> 
+            <td>@Html.TextBoxFor(h => h.p_add)</td> 
+            <td>@Html.ValidationMessageFor(h => h.p_add)</td> 
+</tr>
+        <tr></tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Register" /></td>
+        </tr>
+        
+    </table>
+
+
+
+}
