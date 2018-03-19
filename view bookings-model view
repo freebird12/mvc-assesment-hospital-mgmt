@@ -1,0 +1,57 @@
+@model mvc_sol.Models.appointment_1349730
+    @{
+    ViewBag.Title = "View appointment";
+}
+
+    <h2>view</h2>
+    @using (Html.BeginForm())
+    {
+            <span>status</span>
+            <input type="text" name="txtstatus" />
+            <input type="submit" value="search" formaction="search" />
+    }
+    <table>
+
+        <thead>
+        <th>Patient Id</th>
+        <th>Appointment Id</th>
+        <th>Department</th>
+        <th>Doctor Name</th>
+        <th>Appointment Date</th>
+        <th>Appointment Time</th>
+        <th>status</th>
+        <th>Action</th>
+
+        </thead>
+
+        @foreach (var i in ViewBag.b)
+        {
+            <tr>
+                <td>@i.pid</td>
+                <td>@i.aid</td>
+                <td>@i.dep</td>
+                <td>@i.doc_name</td>
+                <td>@i.adate</td>
+                <td>@i.atime</td>
+                <td>@i.astatus</td>
+                
+                <td>@Html.ActionLink("Cancel", "delete", new { id = i.aid })</td>
+
+            </tr>
+        }
+    </table>
+    <style>
+        table #table1 {
+            border: groove;
+        }
+
+        thead {
+            background-color: aliceblue;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+
+
