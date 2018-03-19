@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using mvc_sol.Models;
+using System.Data.Entity.Core.Objects;
+namespace mvc_sol.Models
+{
+    public class hospitalController : Controller
+    {
+        // GET: hospital
+        public ActionResult add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult add(patient_1349730 p)
+        {
+            if (ModelState.IsValid)
+            {
+
+                DB01TMS155_1718Entities db = new DB01TMS155_1718Entities();
+                ObjectParameter obj = new ObjectParameter("pid", 0);
+                db.add_patient(p.name, p.age, p.contact, p.p_add, obj);
+                int id = Convert.ToInt32(obj.Value);
+                Response.Write("<script>alert('Patient Registered...Patient id=" + id + "')</script>");
+               
+            }
+            return View();
+        }
+        public ActionResult booking()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult booking(appointment_1349730 a)
+        {
+            if (ModelState.IsValid)
+            {
+                DB01TMS155_1718Entities db = new DB01TMS155_1718Entities();
+                ObjectParameter obj1 = new ObjectParameter("bid", 0);
+                db.add_booking(a.pid, a.dep, a.doc_name, a.adate, a.atime, obj1);
+                int bid = Convert.ToInt32(obj1.Value);
+                Response.Write("<script>alert('Appointment Booked...Appointment id=" + bid + "')</script>");
+            }
+            return View();
+        }
+
+        public ActionResult view()
+        {
+            DB01TMS155_1718Entities db = new DB01TMS155_1718Entities();
+           // var v = db.all_booking.ToList();
+            var a=db.all_booking().ToList();
+            ViewBag.b = a;
+            return View();
+        }
+        public ActionResult delete(int? id)
+        {
+            DB01TMS155_1718Entities db = new DB01TMS155_1718Entities();
+            db.del_booking(id);
+            var a = db.all_booking().ToList();
+            ViewBag.b = a;
+
+            return View("view");
+        }
+
+        public ActionResult search(FormCollection form)
+        {
+            DB01TMS155_1718Entities db = new DB01TMS155_1718Entities();
+            string status = form["txtstatus"];
+            var v = db.all_booking().ToList().FindAll(a=>a.dep==status);
+            ViewBag.b = v;
+            return View("view");
+        }
+
+    }
+}
